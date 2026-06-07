@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planilha de Corrida – Thamyres Vertuani</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --lavender: #E5D3E9;
+      --rose:     #D699A5;
+      --burgundy: #703539;
+      --black:    #000000;
+      --white:    #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.2rem clamp(1.5rem, 6vw, 4rem);
+      display: flex; align-items: center; justify-content: space-between;
+      background: #000000cc; backdrop-filter: blur(12px);
+      border-bottom: 1px solid #ffffff08;
+    }
+    .nav-brand { font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #fff; text-decoration: none; }
+    .nav-brand span { color: var(--rose); }
+    .nav-cta { font-size: .65rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--rose); text-decoration: none; border: 1px solid var(--rose); padding: .5rem 1.2rem; transition: background .2s, color .2s; }
+    .nav-cta:hover { background: var(--rose); color: #000; }
+
+    /* HERO */
+    .hero {
+      position: relative; min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+      padding: clamp(6rem, 12vw, 10rem) clamp(1.5rem, 8vw, 8rem) clamp(4rem, 8vw, 7rem);
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 80% 50%, #70353930 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 10% 80%, #D699A515 0%, transparent 60%), #000;
+      z-index: 0;
+    }
+    .hero-monogram {
+      position: absolute; right: -4vw; top: 50%; transform: translateY(-50%);
+      font-size: clamp(18rem, 35vw, 42rem); font-weight: 900; letter-spacing: -.06em;
+      color: transparent; -webkit-text-stroke: 1px #D699A512; line-height: 1; user-select: none; z-index: 0;
+      animation: fadeIn 1.4s ease forwards;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .hero-eyebrow { font-size: clamp(.65rem, 1.2vw, .8rem); font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: var(--rose); margin-bottom: 1.2rem; opacity: 0; animation: slideUp .8s .2s ease forwards; }
+    
+    /* MODIFICAÇÃO DO TÍTULO DA HERO */
+    .hero-title { 
+      font-weight: 900; 
+      line-height: 1; 
+      text-transform: uppercase; 
+      letter-spacing: -.02em; 
+      opacity: 0; 
+      animation: slideUp .8s .4s ease forwards;
+      display: flex; /* Flexbox evita buracos indesejados no mobile */
+      flex-direction: column;
+      gap: 2px; /* Controle fino do espaço entre as linhas */
+    }
+    
+    .hero-title .normal-text {
+      font-size: clamp(2.6rem, 7vw, 6rem);
+    }
+
+    .hero-title .gradient-text { 
+      font-size: clamp(2.6rem, 7vw, 6rem);
+      background: linear-gradient(135deg, var(--lavender) 0%, var(--rose) 60%, var(--burgundy) 100%); 
+      -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; 
+      background-clip: text; 
+    }
+    
+    /* EFEITO 3D E GLOW PARA A PALAVRA FORTE */
+    .hero-title .impact-text {
+      font-size: clamp(2.8rem, 8.5vw, 6.8rem); /* Ajustado levemente para acomodar "SEM LIMITES" de forma harmônica */
+      color: #ffffff;
+      text-shadow: 
+        0 1px 0 #d4d4d4,
+        0 2px 0 #cccccc,
+        0 3px 0 #c4c4c4,
+        0 4px 0 #b4b4b4,
+        0 5px 0 #a4a4a4,
+        0 6px 0 #949494,
+        0 7px 1px rgba(0,0,0,0.6),
+        0 0 15px rgba(255,255,255,0.3),
+        0 10px 30px rgba(214, 153, 165, 0.5); /* Luz inferior rosada */
+      transform-origin: bottom left;
+      margin-top: 5px; /* Respiro após as linhas anteriores */
+      letter-spacing: -0.01em;
+    }
+
+    .hero-subtitle { margin-top: 1.6rem; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300; color: #ccc; line-height: 1.7; max-width: 550px; opacity: 0; animation: slideUp .8s .6s ease forwards; }
+    .hero-cta-group { margin-top: 2.8rem; display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: slideUp .8s .8s ease forwards; }
+
+    /* BUTTONS */
+    .btn-primary, .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      padding: .9rem 2rem; font-family: 'Montserrat', sans-serif; font-size: .8rem; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer;
+      transition: transform .25s, box-shadow .25s, filter .25s, background .25s, color .25s;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--rose), var(--burgundy)); color: #fff; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px #D699A540; filter: brightness(1.1); }
+    
+    .btn-secondary { background: transparent; color: var(--rose); border: 1px solid var(--rose); }
+    .btn-secondary:hover { background: var(--rose); color: #000; }
+    .btn-full { width: 100%; }
+
+    /* DIVIDER */
+    .divider-strip { width: 100%; height: 4px; background: linear-gradient(90deg, var(--burgundy), var(--rose), var(--lavender)); }
+
+    /* SECTIONS */
+    section { position: relative; z-index: 1; }
+    .section-inner { max-width: 1100px; margin: 0 auto; padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 4rem); }
+    .section-label { font-size: .65rem; font-weight: 400; letter-spacing: .35em; text-transform: uppercase; color: var(--rose); margin-bottom: 1rem; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; line-height: 1.1; }
+
+    /* ABOUT */
+    .about-section { background: #0a0a0a; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+    .about-photo-wrap { position: relative; }
+    .about-photo-frame {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #1a1a1a, #111); position: relative; overflow: hidden;
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+      display: flex; align-items: center; justify-content: center;
+    }
+    
+    .about-photo-frame img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 0; }
+    .about-photo-placeholder { font-size: 7rem; opacity: .1; position: absolute; }
+    .about-photo-frame::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, #000000aa 100%), linear-gradient(135deg, #D699A518 0%, transparent 60%);
+      z-index: 1; pointer-events: none;
+    }
+    .about-accent-bar { position: absolute; left: -8px; top: 20%; width: 4px; height: 60%; background: linear-gradient(to bottom, var(--rose), var(--burgundy)); z-index: 2; }
+    .about-text h2 { margin-bottom: 1.5rem; }
+    .about-text p { font-size: .85rem; font-weight: 300; color: #ccc; line-height: 1.6; margin-bottom: 0.8rem; }
+    .about-stats { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .stat { display: flex; flex-direction: column; }
+    .stat-number { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--rose), var(--burgundy)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+    .stat-label { font-size: .65rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: #888; margin-top: .3rem; }
+
+    /* PRODUCT */
+    .product-section { background: #000; }
+    .product-card {
+      background: linear-gradient(135deg, #111 0%, #0d0d0d 100%);
+      border: 1px solid #222; padding: clamp(2rem, 4vw, 3.5rem);
+      position: relative; overflow: hidden; margin-top: 3rem;
+      clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+    }
+    .product-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--burgundy), var(--rose), var(--lavender)); }
+    .product-card-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    @media (max-width: 850px) { .product-card-inner { grid-template-columns: 1fr; } }
+    .product-badge { display: inline-block; background: var(--burgundy); color: var(--lavender); font-size: .6rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: .35rem .9rem; margin-bottom: 1.2rem; }
+    .product-name { font-size: clamp(1.6rem, 3.5vw, 2.6rem); font-weight: 900; text-transform: uppercase; line-height: 1.05; margin-bottom: 1rem; }
+    .product-name em { font-style: normal; background: linear-gradient(135deg, var(--rose), var(--lavender)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .product-desc { font-size: .9rem; font-weight: 300; color: #ccc; line-height: 1.8; }
+    .features-list { list-style: none; margin-top: 2rem; }
+    .features-list li { display: flex; align-items: flex-start; gap: .9rem; padding: .8rem 0; border-bottom: 1px solid #1a1a1a; font-size: .88rem; font-weight: 300; color: #ccc; line-height: 1.5; }
+    .features-list li:last-child { border-bottom: none; }
+    .feat-icon { width: 22px; height: 22px; flex-shrink: 0; background: linear-gradient(135deg, var(--rose), var(--burgundy)); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; align-items: center; justify-content: center; font-size: .65rem; }
+    
+    .price-box { background: #0a0a0a; border: 1px solid #1e1e1e; padding: 2rem; text-align: center; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px)); }
+    .price-label { font-size: .62rem; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: #aaa; margin-bottom: .5rem; }
+    .price-value { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; line-height: 1; }
+    .price-value sup { font-size: .4em; vertical-align: super; font-weight: 300; color: var(--rose); }
+    .price-value span { background: linear-gradient(135deg, var(--lavender), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .price-note { font-size: .72rem; font-weight: 300; color: #888; margin-top: .5rem; }
+    .price-cta { margin-top: 1.8rem; display: flex; flex-direction: column; gap: .8rem; }
+    .secure-note { display: flex; align-items: center; justify-content: center; gap: .4rem; font-size: .65rem; color: #777; margin-top: .8rem; letter-spacing: .05em; }
+
+    /* GARANTIA */
+    .guarantee-box { display: flex; align-items: center; gap: 1rem; background: #111; border: 1px dashed var(--rose); padding: 1rem; margin-top: 1.5rem; text-align: left; border-radius: 4px; }
+    .guarantee-icon { font-size: 2rem; }
+    .guarantee-text strong { display: block; font-size: .85rem; color: var(--rose); margin-bottom: 0.2rem; }
+    .guarantee-text p { font-size: .75rem; color: #aaa; line-height: 1.4; }
+
+    /* HOW */
+    .how-section { background: #060606; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .step-card { position: relative; padding: 2rem 1.5rem; border: 1px solid #1a1a1a; transition: border-color .3s; }
+    .step-card:hover { border-color: var(--rose); }
+    .step-number { font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px #333; line-height: 1; margin-bottom: 1rem; }
+    .step-title { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--rose); margin-bottom: .6rem; }
+    .step-desc { font-size: .82rem; font-weight: 300; color: #aaa; line-height: 1.7; }
+
+    /* TESTIMONIALS */
+    .testimonials-section { background: #000; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .testi-card { background: #0c0c0c; border: 1px solid #1a1a1a; padding: 1.8rem; transition: transform .3s, border-color .3s; }
+    .testi-card:hover { transform: translateY(-4px); border-color: #D699A540; }
+    .testi-quote { font-size: 3rem; line-height: 1; color: var(--rose); opacity: .3; font-weight: 900; }
+    .testi-text { font-size: .85rem; font-weight: 300; color: #ccc; line-height: 1.8; margin-top: -.5rem; margin-bottom: 1.5rem; }
+    .testi-author { display: flex; align-items: center; gap: .8rem; }
+    .testi-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--rose), var(--burgundy)); display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; flex-shrink: 0; }
+    .testi-name { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+    .testi-role { font-size: .65rem; font-weight: 400; color: #888; margin-top: .15rem; }
+
+    /* FAQ SECTION */
+    .faq-section { background: #050505; }
+    .faq-grid { max-width: 800px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 1rem; }
+    details { background: #111; border: 1px solid #222; padding: 1rem 1.5rem; cursor: pointer; transition: border-color 0.3s; }
+    details:hover { border-color: #D699A550; }
+    summary { font-size: .95rem; font-weight: 600; color: #fff; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; color: var(--rose); font-size: 1.5rem; font-weight: 300; line-height: 1; transition: transform 0.3s; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details p { font-size: .85rem; font-weight: 300; color: #aaa; line-height: 1.7; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #222; }
+
+    /* CTA */
+    .cta-section { background: linear-gradient(135deg, #0d060a 0%, #1a0a0d 50%, #070308 100%); position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, #D699A510 0%, transparent 70%); pointer-events: none; }
+    .cta-inner { text-align: center; max-width: 700px; margin: 0 auto; }
+    .cta-inner .section-title { font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: 1.2rem; }
+    .cta-inner p { font-size: 1rem; font-weight: 300; color: #ccc; line-height: 1.8; margin-bottom: 2.5rem; }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { background: #000; border-top: 1px solid #111; padding: 2.5rem clamp(1.5rem, 6vw, 4rem); }
+    .footer-content { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; }
+    .footer-brand { font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+    .footer-brand span { color: var(--rose); }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { color: #888; text-decoration: none; font-size: .65rem; font-weight: 400; letter-spacing: .15em; text-transform: uppercase; transition: color .2s; }
+    .footer-links a:hover { color: var(--rose); }
+    
+    .footer-legal { border-top: 1px solid #111; padding-top: 1.5rem; text-align: center; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-legal p { font-size: 0.7rem; color: #555; }
+    .footer-legal div a { color: #555; text-decoration: none; font-size: 0.65rem; margin: 0 10px; transition: color 0.3s; }
+    .footer-legal div a:hover { color: var(--rose); }
+
+    /* WHATSAPP FLOAT */
+    .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 999; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px #25D36660; transition: transform .25s, box-shadow .25s; text-decoration: none; }
+    .whatsapp-float:hover { transform: scale(1.12); box-shadow: 0 8px 30px #25D36680; }
+    .whatsapp-float svg { width: 28px; height: 28px; }
+
+    /* MOBILE TWEAKS */
+    @media (max-width: 480px) {
+        .hero-cta-group, .cta-buttons { flex-direction: column; width: 100%; }
+        .hero-cta-group a, .cta-buttons a { width: 100%; }
+        .price-box { padding: 1.5rem; }
+    }
+
+    /* ANIMATIONS */
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">Thamyres <span>Vertuani</span></a>
+  <a class="nav-cta" href="#produto">Quero a planilha</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-monogram">TV</div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Personal Trainer · Especialista em Corrida</p>
+    
+    <h1 class="hero-title">
+      <span class="normal-text">Corra mais,</span>
+      <span class="gradient-text">treine melhor,</span>
+      <span class="impact-text">evolua sem limites.</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Pare de treinar sem direção. Tenha acesso ao método, acompanhamento e ferramentas que aceleram sua evolução.
+    </p>
+    <div class="hero-cta-group">
+      <a class="btn-primary" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20comprar%20a%20planilha%20de%20corrida." target="_blank">▶ Quero começar agora</a>
+      <a class="btn-secondary" href="#produto">Ver detalhes</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider-strip"></div>
+
+<section class="about-section">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-photo-wrap reveal">
+        <div class="about-accent-bar"></div>
+        <div class="about-photo-frame">
+          <img src="thamyres.jpg" alt="Foto de Thamyres Vertuani, Personal Trainer" />
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <p class="section-label">Quem é ela</p>
+        <h2 class="section-title">Thamyres Vertuani</h2>
+        <p style="margin-top:1.2rem;">Prazer, eu sou Thamyres Vertuani. Sou Profissional de Educação Física, pós-graduada em Fisioterapia Desportiva e especialista em coluna, gestantes e pós-parto.</p>
+        <p>Acredito que o exercício físico transforma muito mais do que o corpo. Ele melhora a autoestima, a confiança, a saúde e a qualidade de vida. Meu trabalho é ajudar mulheres a conquistarem resultados de forma segura e sustentável, respeitando sua rotina, seus limites e seus objetivos. Atuo com musculação, treinamento de força e corrida de rua, acompanhando desde iniciantes até mulheres que buscam mais desempenho.</p>
+        <p>Não acredito em fórmulas prontas. Acredito em planejamento, acompanhamento, ciência e constância.</p>
+        <p>Minha missão é mostrar que é possível conquistar saúde e estética ao mesmo tempo, através de um processo inteligente e bem orientado. Mais do que treinar mulheres, ajudo cada uma delas a se tornar mais forte, confiante e capaz de alcançar o que deseja.</p>
+        <div class="about-stats">
+          <div class="stat"><span class="stat-number">5+</span><span class="stat-label">Anos de exp.</span></div>
+          <div class="stat"><span class="stat-number">200+</span><span class="stat-label">Alunos ativos</span></div>
+          <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Dedicação</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-section" id="produto">
+  <div class="section-inner">
+    <p class="section-label reveal">O produto</p>
+    <h2 class="section-title reveal">A planilha que<br/>muda o jogo</h2>
+    <div class="product-card reveal">
+      <div class="product-card-inner">
+        <div>
+          <span class="product-badge">Lançamento</span>
+          <h3 class="product-name">Planilha de<br/><em>Corrida</em></h3>
+          <p class="product-desc">Um programa de treino completo, estruturado semana a semana, para você evoluir com segurança, consistência e resultado real.</p>
+          <ul class="features-list">
+            <li><span class="feat-icon">✓</span> Periodização progressiva por semanas</li>
+            <li><span class="feat-icon">✓</span> Treinos por zonas de frequência cardíaca</li>
+            <li><span class="feat-icon">✓</span> Indicada para iniciantes e intermediários</li>
+            <li><span class="feat-icon">✓</span> Dicas de aquecimento e recuperação</li>
+            <li><span class="feat-icon">✓</span> Orientações de pace e intensidade</li>
+            <li><span class="feat-icon">✓</span> Suporte via WhatsApp com a Thamyres</li>
+          </ul>
+        </div>
+        <div>
+          <div class="price-box">
+            <p class="price-label">Investimento único</p>
+            <p class="price-value"><sup>R$</sup><span>97</span></p>
+            <p class="price-note">Acesso vitalício · Atualização incluída</p>
+            <div class="price-cta">
+              <a class="btn-primary btn-full" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20comprar%20a%20planilha%20de%20corrida." target="_blank">📱 Comprar pelo WhatsApp</a>
+              <a class="btn-secondary btn-full" href="https://www.instagram.com/thamyresvertuani_personal?igsh=MmJsOXJ2czMxMTZq" target="_blank">📸 Ver no Instagram</a>
+            </div>
+            <p class="secure-note">🔒 Pagamento 100% seguro</p>
+            
+            <div class="guarantee-box">
+               <span class="guarantee-icon">🛡️</span>
+               <div class="guarantee-text">
+                 <strong>Garantia de 7 Dias</strong>
+                 <p>Risco zero! Se não gostar, devolvemos seu dinheiro.</p>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="section-inner">
+    <p class="section-label reveal">Como funciona</p>
+    <h2 class="section-title reveal">Simples assim</h2>
+    <div class="steps-grid">
+      <div class="step-card reveal"><div class="step-number">01</div><p class="step-title">Entre em contato</p><p class="step-desc">Clique no botão e fale direto com a Thamyres pelo WhatsApp. É rápido e sem complicação.</p></div>
+      <div class="step-card reveal"><div class="step-number">02</div><p class="step-title">Realize o pagamento</p><p class="step-desc">Pague de forma segura via Pix, transferência ou cartão. Simples e acessível.</p></div>
+      <div class="step-card reveal"><div class="step-number">03</div><p class="step-title">Receba a planilha</p><p class="step-desc">Após a confirmação, você recebe sua planilha na hora, direto no WhatsApp em PDF/Link.</p></div>
+      <div class="step-card reveal"><div class="step-number">04</div><p class="step-title">Corra e evolua</p><p class="step-desc">Siga o programa, registre sua evolução e alcance metas que você nem sabia que eram possíveis.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials-section">
+  <div class="section-inner">
+    <p class="section-label reveal">Quem já treina com ela</p>
+    <h2 class="section-title reveal">Resultados reais</h2>
+    <div class="testimonials-grid">
+      
+      <div class="testi-card reveal">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">
+          Seu acompanhamento mudou completamente minha relação com a academia, antes eu tinha muitas inseguranças com o ambiente e com os treinos, mas você sempre me fez sentir confortável, acolhida e capaz.<br><br>
+          Cada treino acaba sendo muito mais do que só exercício físico, sinto como uma extensão da terapia, porque saio me sentindo melhor comigo mesma, em meio a desabafos, risadas e suor rsrs<br><br>
+          Também adoro como você sempre reforça que resultado vai muito além da balança, fazendo a gente valorizar pequenas conquistas e mudanças que antes eu nem percebia, o que deixa o processo muito mais leve, saudável e motivador 🫶<br><br>
+          Minha experiência não poderia ser nada menos do que maravilhosa 💋💋
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">ME</div>
+          <div>
+            <p class="testi-name">Maria Eduarda Barros</p>
+            <p class="testi-role">Aluna de Personal</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">
+          Bom dia meu amor!! Passando para te dar um feedback do meu primeiro dia no pilates.<br><br>
+          Percebi o quanto estou dura, sem flexibilidade e com muita tensão acumulada nos ombros. Quando fui curvar para descer os braços até o chão, senti bastante a coluna, como se estivesse muito sensível. Também notei que a perna direita me obedeceu menos nos exercícios do que a esquerda, acredito que por conta do nervo ciático.<br><br>
+          Outra dificuldade que senti bastante foi na respiração durante os treinos, preciso trabalhar melhor isso.<br><br>
+          Mas, apesar de tudo isso, hoje acordei me sentindo mais leve, com a sensação dos músculos “vivos” rsrs… e o melhor: sem dores! Estou ótima e já animada para amanhã, querendo fazer o meu melhor.<br><br>
+          Outra detalhe! Ao chegar em casa, senti um cansaço diferente e acabei dormindo mais cedo, esse cansaço relaxou meu corpo que o sono foi outro. Muito bom!!!<br><br>
+          Gratidão! A melhor personal do mundo 🫶
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">AM</div>
+          <div>
+            <p class="testi-name">Alexsandra M.V.</p>
+            <p class="testi-role">Aluna de Pilates</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">
+          Bom dia lindeza! Queria ter dado feedback ontem mas Anna dominou meu celular.<br><br>
+          Amei Sara. A abordagem, rolou empatia, a forma como conduziu com atenção, cuidado aos detalhes… enfim, só agradeço. Tenho confiança q estamos iniciando um trabalho de qualidade.<br><br>
+          Seguirei conforme orientações
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">CG</div>
+          <div>
+            <p class="testi-name">Carolina Gava</p>
+            <p class="testi-role">Aluna</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">
+          Gente, você é tudoooo!!! Eu amei!! Com certeza irei fazer um bom uso de todos os ebooks, estou encantada com todo carinho e apoio que você tem com suas alunas
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">LA</div>
+          <div>
+            <p class="testi-name">Lara Amancio</p>
+            <p class="testi-role">Aluna</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="section-inner">
+    <p class="section-label reveal">Dúvidas</p>
+    <h2 class="section-title reveal">Perguntas Frequentes</h2>
+    <div class="faq-grid reveal">
+      <details>
+        <summary>Sou totalmente iniciante, a planilha serve para mim?</summary>
+        <p>Sim! A planilha possui adaptações e uma progressão de volume ideal para quem está começando do zero, intercalando caminhada e corrida de forma segura.</p>
+      </details>
+      <details>
+        <summary>Como vou receber o acesso?</summary>
+        <p>Assim que o pagamento for confirmado pelo WhatsApp, a Thamyres enviará o arquivo da planilha diretamente para você no próprio chat, de forma imediata.</p>
+      </details>
+      <details>
+        <summary>Por quanto tempo tenho acesso à planilha?</summary>
+        <p>O acesso é vitalício. Uma vez que você compra a planilha, o material é seu para sempre, podendo refazer o ciclo de treinos quantas vezes quiser.</p>
+      </details>
+      <details>
+        <summary>Tenho suporte caso tenha dúvidas?</summary>
+        <p>Com certeza. Você terá suporte direto via WhatsApp com a Thamyres para tirar dúvidas sobre execução, dores leves e ajustes de intensidade.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="section-inner">
+    <div class="cta-inner reveal">
+      <p class="section-label">Sua vez</p>
+      <h2 class="section-title">Pronta para transformar sua corrida?</h2>
+      <p>Não espere o momento perfeito. Ele é agora. Dê o primeiro passo com quem sabe como te levar ao próximo nível.</p>
+      <div class="cta-buttons">
+        <a class="btn-primary" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20comprar%20a%20planilha%20de%20corrida." target="_blank">📱 Falar com a Thamyres</a>
+        <a class="btn-secondary" href="https://www.instagram.com/thamyresvertuani_personal?igsh=MmJsOXJ2czMxMTZq" target="_blank">📸 Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+      <p class="footer-brand">Thamyres <span>Vertuani</span> · Personal Trainer</p>
+      <div class="footer-links">
+        <a href="https://wa.me/5527998586051" target="_blank">WhatsApp</a>
+        <a href="https://www.instagram.com/thamyresvertuani_personal?igsh=MmJsOXJ2czMxMTZq" target="_blank">Instagram</a>
+        <a href="#produto">Planilha</a>
+      </div>
+  </div>
+  
+  <div class="footer-legal">
+      <p>&copy; 2026 Thamyres Vertuani. Todos os direitos reservados.</p>
+      <div>
+          <a href="#">Termos de Uso</a> | 
+          <a href="#">Política de Privacidade</a>
+      </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20saber%20mais%20sobre%20a%20planilha%20de%20corrida." target="_blank" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>

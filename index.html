@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planilha de Corrida – Thamyres Vertuani</title>
+  <title>Assessoria & Consultoria de Corrida – Thamyres Vertuani</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700;900&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -12,12 +12,14 @@
       --burgundy: #703539;
       --black:    #000000;
       --white:    #ffffff;
+      --card-bg:  #0d0d0d;
+      --border:   #222222;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--black); color: var(--white); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
 
-    /* NAV */
+    /* NAVEGAÇÃO */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 1.2rem clamp(1.5rem, 6vw, 4rem);
@@ -51,7 +53,6 @@
     .hero-content { position: relative; z-index: 1; max-width: 680px; }
     .hero-eyebrow { font-size: clamp(.65rem, 1.2vw, .8rem); font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: var(--rose); margin-bottom: 1.2rem; opacity: 0; animation: slideUp .8s .2s ease forwards; }
     
-    /* MODIFICAÇÃO DO TÍTULO DA HERO */
     .hero-title { 
       font-weight: 900; 
       line-height: 1; 
@@ -59,15 +60,11 @@
       letter-spacing: -.02em; 
       opacity: 0; 
       animation: slideUp .8s .4s ease forwards;
-      display: flex; /* Flexbox evita buracos indesejados no mobile */
+      display: flex;
       flex-direction: column;
-      gap: 2px; /* Controle fino do espaço entre as linhas */
+      gap: 2px;
     }
-    
-    .hero-title .normal-text {
-      font-size: clamp(2.6rem, 7vw, 6rem);
-    }
-
+    .hero-title .normal-text { font-size: clamp(2.6rem, 7vw, 6rem); }
     .hero-title .gradient-text { 
       font-size: clamp(2.6rem, 7vw, 6rem);
       background: linear-gradient(135deg, var(--lavender) 0%, var(--rose) 60%, var(--burgundy) 100%); 
@@ -75,10 +72,8 @@
       -webkit-text-fill-color: transparent; 
       background-clip: text; 
     }
-    
-    /* EFEITO 3D E GLOW PARA A PALAVRA FORTE */
     .hero-title .impact-text {
-      font-size: clamp(2.8rem, 8.5vw, 6.8rem); /* Ajustado levemente para acomodar "SEM LIMITES" de forma harmônica */
+      font-size: clamp(2.8rem, 8.5vw, 6.8rem);
       color: #ffffff;
       text-shadow: 
         0 1px 0 #d4d4d4,
@@ -89,9 +84,9 @@
         0 6px 0 #949494,
         0 7px 1px rgba(0,0,0,0.6),
         0 0 15px rgba(255,255,255,0.3),
-        0 10px 30px rgba(214, 153, 165, 0.5); /* Luz inferior rosada */
+        0 10px 30px rgba(214, 153, 165, 0.5);
       transform-origin: bottom left;
-      margin-top: 5px; /* Respiro após as linhas anteriores */
+      margin-top: 5px;
       letter-spacing: -0.01em;
     }
 
@@ -108,7 +103,6 @@
     }
     .btn-primary { background: linear-gradient(135deg, var(--rose), var(--burgundy)); color: #fff; }
     .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px #D699A540; filter: brightness(1.1); }
-    
     .btn-secondary { background: transparent; color: var(--rose); border: 1px solid var(--rose); }
     .btn-secondary:hover { background: var(--rose); color: #000; }
     .btn-full { width: 100%; }
@@ -118,7 +112,7 @@
 
     /* SECTIONS */
     section { position: relative; z-index: 1; }
-    .section-inner { max-width: 1100px; margin: 0 auto; padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 4rem); }
+    .section-inner { max-width: 1200px; margin: 0 auto; padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 4rem); }
     .section-label { font-size: .65rem; font-weight: 400; letter-spacing: .35em; text-transform: uppercase; color: var(--rose); margin-bottom: 1rem; }
     .section-title { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; line-height: 1.1; }
 
@@ -133,9 +127,7 @@
       clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
       display: flex; align-items: center; justify-content: center;
     }
-    
     .about-photo-frame img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 0; }
-    .about-photo-placeholder { font-size: 7rem; opacity: .1; position: absolute; }
     .about-photo-frame::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(to bottom, transparent 40%, #000000aa 100%), linear-gradient(135deg, #D699A518 0%, transparent 60%);
@@ -149,40 +141,111 @@
     .stat-number { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--rose), var(--burgundy)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
     .stat-label { font-size: .65rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: #888; margin-top: .3rem; }
 
-    /* PRODUCT */
-    .product-section { background: #000; }
-    .product-card {
-      background: linear-gradient(135deg, #111 0%, #0d0d0d 100%);
-      border: 1px solid #222; padding: clamp(2rem, 4vw, 3.5rem);
-      position: relative; overflow: hidden; margin-top: 3rem;
-      clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px));
-    }
-    .product-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--burgundy), var(--rose), var(--lavender)); }
-    .product-card-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-    @media (max-width: 850px) { .product-card-inner { grid-template-columns: 1fr; } }
-    .product-badge { display: inline-block; background: var(--burgundy); color: var(--lavender); font-size: .6rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; padding: .35rem .9rem; margin-bottom: 1.2rem; }
-    .product-name { font-size: clamp(1.6rem, 3.5vw, 2.6rem); font-weight: 900; text-transform: uppercase; line-height: 1.05; margin-bottom: 1rem; }
-    .product-name em { font-style: normal; background: linear-gradient(135deg, var(--rose), var(--lavender)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .product-desc { font-size: .9rem; font-weight: 300; color: #ccc; line-height: 1.8; }
-    .features-list { list-style: none; margin-top: 2rem; }
-    .features-list li { display: flex; align-items: flex-start; gap: .9rem; padding: .8rem 0; border-bottom: 1px solid #1a1a1a; font-size: .88rem; font-weight: 300; color: #ccc; line-height: 1.5; }
-    .features-list li:last-child { border-bottom: none; }
-    .feat-icon { width: 22px; height: 22px; flex-shrink: 0; background: linear-gradient(135deg, var(--rose), var(--burgundy)); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; align-items: center; justify-content: center; font-size: .65rem; }
+    /* SERVICES / PLANS SECTION */
+    .plans-section { background: #000; }
     
-    .price-box { background: #0a0a0a; border: 1px solid #1e1e1e; padding: 2rem; text-align: center; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px)); }
-    .price-label { font-size: .62rem; font-weight: 400; letter-spacing: .3em; text-transform: uppercase; color: #aaa; margin-bottom: .5rem; }
-    .price-value { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; line-height: 1; }
-    .price-value sup { font-size: .4em; vertical-align: super; font-weight: 300; color: var(--rose); }
-    .price-value span { background: linear-gradient(135deg, var(--lavender), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .price-note { font-size: .72rem; font-weight: 300; color: #888; margin-top: .5rem; }
-    .price-cta { margin-top: 1.8rem; display: flex; flex-direction: column; gap: .8rem; }
-    .secure-note { display: flex; align-items: center; justify-content: center; gap: .4rem; font-size: .65rem; color: #777; margin-top: .8rem; letter-spacing: .05em; }
+    .module-header {
+      margin-top: 4rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .module-title { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 900; text-transform: uppercase; color: var(--white); }
+    .module-subtitle { font-size: .85rem; font-weight: 300; color: #aaa; max-width: 600px; line-height: 1.5; }
 
-    /* GARANTIA */
-    .guarantee-box { display: flex; align-items: center; gap: 1rem; background: #111; border: 1px dashed var(--rose); padding: 1rem; margin-top: 1.5rem; text-align: left; border-radius: 4px; }
-    .guarantee-icon { font-size: 2rem; }
-    .guarantee-text strong { display: block; font-size: .85rem; color: var(--rose); margin-bottom: 0.2rem; }
-    .guarantee-text p { font-size: .75rem; color: #aaa; line-height: 1.4; }
+    /* GRID DE CARDS */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .plan-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2.2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      transition: border-color .3s, transform .3s;
+      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+    }
+    .plan-card:hover { border-color: var(--rose); transform: translateY(-4px); }
+    
+    /* CARD POPULAR */
+    .plan-card.featured {
+      border-color: var(--rose);
+      background: linear-gradient(135deg, #140d10 0%, #0d0d0d 100%);
+    }
+    .plan-card.featured::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--burgundy), var(--rose), var(--lavender));
+    }
+
+    .badge-featured {
+      position: absolute; top: 1rem; right: 1rem;
+      background: var(--burgundy); color: var(--lavender);
+      font-size: .55rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; padding: .3rem .7rem;
+    }
+
+    .plan-name { font-size: 1.3rem; font-weight: 900; text-transform: uppercase; color: #fff; margin-bottom: .4rem; }
+    .plan-target { font-size: .78rem; font-weight: 300; color: #aaa; margin-bottom: 1.5rem; line-height: 1.4; min-height: 2.6em; }
+
+    .plan-price-box { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #1a1a1a; }
+    .plan-price-label { font-size: .6rem; font-weight: 400; letter-spacing: .2em; text-transform: uppercase; color: #777; margin-bottom: .2rem; }
+    .plan-price { font-size: 2.2rem; font-weight: 900; color: #fff; line-height: 1; }
+    .plan-price span { background: linear-gradient(135deg, var(--lavender), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .plan-price sub { font-size: .4em; font-weight: 300; color: #888; text-transform: lowercase; }
+
+    .plan-features { list-style: none; margin-bottom: 2rem; flex-grow: 1; }
+    .plan-features li { display: flex; align-items: flex-start; gap: .7rem; padding: .5rem 0; font-size: .82rem; font-weight: 300; color: #ccc; line-height: 1.4; }
+    .plan-feat-icon { color: var(--rose); font-weight: 700; }
+
+    /* CONSULTORIA ONLINE ESPECIAL CARD */
+    .consultancy-card {
+      background: linear-gradient(135deg, #111 0%, #080808 100%);
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+    }
+    @media (max-width: 850px) { .consultancy-card { grid-template-columns: 1fr; } }
+    
+    .consultancy-pricing {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      background: #050505;
+      padding: 1.5rem;
+      border: 1px solid #1e1e1e;
+    }
+    .price-row { display: flex; justify-content: space-between; align-items: center; font-size: .85rem; border-bottom: 1px solid #151515; padding-bottom: .5rem; }
+    .price-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .price-row strong { color: var(--rose); font-weight: 700; font-size: 1.1rem; }
+
+    /* DIFFERENTIALS BOX */
+    .differentials-box {
+      margin-top: 4rem;
+      background: #090909;
+      border: 1px solid #1a1a1a;
+      padding: 2.5rem;
+      text-align: center;
+      clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+    }
+    .differentials-title { font-size: 1.2rem; font-weight: 700; text-transform: uppercase; color: var(--rose); margin-bottom: 1rem; letter-spacing: .1em; }
+    .differentials-text { font-size: .9rem; font-weight: 300; color: #ccc; max-width: 850px; margin: 0 auto; line-height: 1.7; }
 
     /* HOW */
     .how-section { background: #060606; }
@@ -247,7 +310,6 @@
     @media (max-width: 480px) {
         .hero-cta-group, .cta-buttons { flex-direction: column; width: 100%; }
         .hero-cta-group a, .cta-buttons a { width: 100%; }
-        .price-box { padding: 1.5rem; }
     }
 
     /* ANIMATIONS */
@@ -261,7 +323,7 @@
 
 <nav>
   <a class="nav-brand" href="#">Thamyres <span>Vertuani</span></a>
-  <a class="nav-cta" href="#produto">Quero a planilha</a>
+  <a class="nav-cta" href="#planos">Escolher Plano</a>
 </nav>
 
 <section class="hero">
@@ -277,11 +339,11 @@
     </h1>
 
     <p class="hero-subtitle">
-      Pare de treinar sem direção. Tenha acesso ao método, acompanhamento e ferramentas que aceleram sua evolução.
+      Treinos presenciais e consultorias online sob medida para você alcançar sua melhor versão com acompanhamento técnico e ciência.
     </p>
     <div class="hero-cta-group">
-      <a class="btn-primary" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20comprar%20a%20planilha%20de%20corrida." target="_blank">▶ Quero começar agora</a>
-      <a class="btn-secondary" href="#produto">Ver detalhes</a>
+      <a class="btn-primary" href="#planos">Conhecer os Planos</a>
+      <a class="btn-secondary" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Gostaria%20de%20tirar%20uma%20d%C3%BAvida%20sobre%20as%20consultorias." target="_blank">Falar no WhatsApp</a>
     </div>
   </div>
 </section>
@@ -306,7 +368,7 @@
         <p>Minha missão é mostrar que é possível conquistar saúde e estética ao mesmo tempo, através de um processo inteligente e bem orientado. Mais do que treinar mulheres, ajudo cada uma delas a se tornar mais forte, confiante e capaz de alcançar o que deseja.</p>
         <div class="about-stats">
           <div class="stat"><span class="stat-number">5+</span><span class="stat-label">Anos de exp.</span></div>
-          <div class="stat"><span class="stat-number">200+</span><span class="stat-label">Alunos ativos</span></div>
+          <div class="stat"><span class="stat-number">200+</span><span class="stat-label">Alunas ativas</span></div>
           <div class="stat"><span class="stat-number">100%</span><span class="stat-label">Dedicação</span></div>
         </div>
       </div>
@@ -314,47 +376,190 @@
   </div>
 </section>
 
-<section class="product-section" id="produto">
+<!-- SEÇÃO DE PLANOS E PROGRAMAS -->
+<section class="plans-section" id="planos">
   <div class="section-inner">
-    <p class="section-label reveal">O produto</p>
-    <h2 class="section-title reveal">A planilha que<br/>muda o jogo</h2>
-    <div class="product-card reveal">
-      <div class="product-card-inner">
-        <div>
-          <span class="product-badge">Lançamento</span>
-          <h3 class="product-name">Planilha de<br/><em>Corrida</em></h3>
-          <p class="product-desc">Um programa de treino completo, estruturado semana a semana, para você evoluir com segurança, consistência e resultado real.</p>
-          <ul class="features-list">
-            <li><span class="feat-icon">✓</span> Periodização progressiva por semanas</li>
-            <li><span class="feat-icon">✓</span> Treinos por zonas de frequência cardíaca</li>
-            <li><span class="feat-icon">✓</span> Indicada para iniciantes e intermediários</li>
-            <li><span class="feat-icon">✓</span> Dicas de aquecimento e recuperação</li>
-            <li><span class="feat-icon">✓</span> Orientações de pace e intensidade</li>
-            <li><span class="feat-icon">✓</span> Suporte via WhatsApp com a Thamyres</li>
-          </ul>
-        </div>
-        <div>
-          <div class="price-box">
-            <p class="price-label">Investimento único</p>
-            <p class="price-value"><sup>R$</sup><span>97</span></p>
-            <p class="price-note">Acesso vitalício · Atualização incluída</p>
-            <div class="price-cta">
-              <a class="btn-primary btn-full" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20comprar%20a%20planilha%20de%20corrida." target="_blank">📱 Comprar pelo WhatsApp</a>
-              <a class="btn-secondary btn-full" href="https://www.instagram.com/thamyresvertuani_personal?igsh=MmJsOXJ2czMxMTZq" target="_blank">📸 Ver no Instagram</a>
-            </div>
-            <p class="secure-note">🔒 Pagamento 100% seguro</p>
-            
-            <div class="guarantee-box">
-               <span class="guarantee-icon">🛡️</span>
-               <div class="guarantee-text">
-                 <strong>Garantia de 7 Dias</strong>
-                 <p>Risco zero! Se não gostar, devolvemos seu dinheiro.</p>
-               </div>
-            </div>
-          </div>
-        </div>
+    <p class="section-label reveal">Modalidades</p>
+    <h2 class="section-title reveal">Escolha o seu programa</h2>
+
+    <!-- MÓDULO PRESENCIAL -->
+    <div class="module-header reveal">
+      <div>
+        <h3 class="module-title">🏃‍♀️ Módulo Presencial</h3>
+        <p class="module-subtitle">Assessoria de Corrida Feminina com treinos presenciais para quem busca acompanhamento técnico de perto e suporte especializado.</p>
       </div>
     </div>
+
+    <div class="cards-grid reveal">
+      
+      <!-- START PRESENCIAL -->
+      <div class="plan-card">
+        <div>
+          <h4 class="plan-name">Start</h4>
+          <p class="plan-target">Ideal para iniciantes e corredoras recreativas (1x por semana).</p>
+          <div class="plan-price-box">
+            <p class="plan-price-label">Investimento</p>
+            <p class="plan-price"><span>R$ 197</span><sub>/mês</sub></p>
+          </div>
+          <ul class="plan-features">
+            <li><span class="plan-feat-icon">✓</span> Treino acompanhado presencial</li>
+            <li><span class="plan-feat-icon">✓</span> Técnica de corrida e postura</li>
+            <li><span class="plan-feat-icon">✓</span> Exercícios de mobilidade</li>
+            <li><span class="plan-feat-icon">✓</span> Acesso ao grupo do WhatsApp</li>
+            <li><span class="plan-feat-icon">✓</span> Acompanhamento da evolução</li>
+          </ul>
+        </div>
+        <a class="btn-secondary btn-full" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20saber%20mais%20sobre%20o%20plano%20Presencial%20START." target="_blank">Quero o Start</a>
+      </div>
+
+      <!-- MOVE PRESENCIAL (MAIS PROCURADO) -->
+      <div class="plan-card featured">
+        <span class="badge-featured">Mais Procurado</span>
+        <div>
+          <h4 class="plan-name">Move</h4>
+          <p class="plan-target">Equilíbrio perfeito para evolução contínua (2x por semana).</p>
+          <div class="plan-price-box">
+            <p class="plan-price-label">Investimento</p>
+            <p class="plan-price"><span>R$ 299</span><sub>/mês</sub></p>
+          </div>
+          <ul class="plan-features">
+            <li><span class="plan-feat-icon">✓</span> Tudo do plano Start</li>
+            <li><span class="plan-feat-icon">✓</span> Planilha complementar de treinos</li>
+            <li><span class="plan-feat-icon">✓</span> Feedback técnico individual</li>
+            <li><span class="plan-feat-icon">✓</span> Orientação direcionada para provas</li>
+            <li><span class="plan-feat-icon">✓</span> Estratégias de ritmo (pace)</li>
+          </ul>
+        </div>
+        <a class="btn-primary btn-full" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20me%20inscrever%20no%20plano%20Presencial%20MOVE." target="_blank">Quero o Move</a>
+      </div>
+
+      <!-- PERFORMANCE PRESENCIAL -->
+      <div class="plan-card">
+        <div>
+          <h4 class="plan-name">Performance</h4>
+          <p class="plan-target">Plano premium para quem busca máxima performance (3x por semana).</p>
+          <div class="plan-price-box">
+            <p class="plan-price-label">Investimento</p>
+            <p class="plan-price"><span>R$ 399</span><sub>/mês</sub></p>
+          </div>
+          <ul class="plan-features">
+            <li><span class="plan-feat-icon">✓</span> Tudo do plano Move</li>
+            <li><span class="plan-feat-icon">✓</span> Acompanhamento técnico de perto</li>
+            <li><span class="plan-feat-icon">✓</span> Análise detalhada de desempenho</li>
+            <li><span class="plan-feat-icon">✓</span> Ajustes individualizados avançados</li>
+            <li><span class="plan-feat-icon">✓</span> Suporte ampliado focado em metas</li>
+          </ul>
+        </div>
+        <a class="btn-secondary btn-full" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20o%20plano%20Presencial%20PERFORMANCE." target="_blank">Quero Performance</a>
+      </div>
+
+    </div>
+
+    <!-- MÓDULO ONLINE -->
+    <div class="module-header reveal" style="margin-top: 6rem;">
+      <div>
+        <h3 class="module-title">💻 Módulo Online</h3>
+        <p class="module-subtitle">Consultoria de Corrida e Treino Individualizado para quem deseja treinar de onde quiser, com acompanhamento direto pelo WhatsApp.</p>
+      </div>
+    </div>
+
+    <!-- CARDS CORRIDA ONLINE -->
+    <div class="cards-grid reveal">
+      
+      <!-- START ONLINE -->
+      <div class="plan-card">
+        <div>
+          <h4 class="plan-name">Start Online</h4>
+          <p class="plan-target">Para iniciantes e corredoras recreativas treinarem com autonomia.</p>
+          <div class="plan-price-box">
+            <p class="plan-price-label">A partir de</p>
+            <p class="plan-price"><span>R$ 99,90</span><sub>/mês</sub></p>
+          </div>
+          <ul class="plan-features">
+            <li><span class="plan-feat-icon">✓</span> Planilha de corrida personalizada</li>
+            <li><span class="plan-feat-icon">✓</span> Ajustes mensais de treino</li>
+            <li><span class="plan-feat-icon">✓</span> Orientações técnicas básicas</li>
+            <li><span class="plan-feat-icon">✓</span> Suporte direto via WhatsApp</li>
+          </ul>
+        </div>
+        <a class="btn-secondary btn-full" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20saber%20mais%20sobre%20a%20Consultoria%20Online%20START." target="_blank">Quero Start Online</a>
+      </div>
+
+      <!-- EVOLUTION ONLINE -->
+      <div class="plan-card featured">
+        <span class="badge-featured">Recomendado</span>
+        <div>
+          <h4 class="plan-name">Evolution Online</h4>
+          <p class="plan-target">Para quem busca constante evolução de ritmo e distância.</p>
+          <div class="plan-price-box">
+            <p class="plan-price-label">A partir de</p>
+            <p class="plan-price"><span>R$ 149,90</span><sub>/mês</sub></p>
+          </div>
+          <ul class="plan-features">
+            <li><span class="plan-feat-icon">✓</span> Tudo do Start Online</li>
+            <li><span class="plan-feat-icon">✓</span> Ajustes quinzenais da planilha</li>
+            <li><span class="plan-feat-icon">✓</span> Estratégia de pace individualizada</li>
+            <li><span class="plan-feat-icon">✓</span> Orientação focada para provas</li>
+            <li><span class="plan-feat-icon">✓</span> Feedback ativo dos treinos enviados</li>
+          </ul>
+        </div>
+        <a class="btn-primary btn-full" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20me%20inscrever%20no%20EVOLUTION%20Online." target="_blank">Quero Evolution Online</a>
+      </div>
+
+      <!-- PERFORMANCE ONLINE -->
+      <div class="plan-card">
+        <div>
+          <h4 class="plan-name">Performance Online</h4>
+          <p class="plan-target">Acompanhamento de elite para buscar seus melhores tempos.</p>
+          <div class="plan-price-box">
+            <p class="plan-price-label">A partir de</p>
+            <p class="plan-price"><span>R$ 199,90</span><sub>/mês</sub></p>
+          </div>
+          <ul class="plan-features">
+            <li><span class="plan-feat-icon">✓</span> Tudo do Evolution Online</li>
+            <li><span class="plan-feat-icon">✓</span> Ajustes semanais de carga</li>
+            <li><span class="plan-feat-icon">✓</span> Análise rigorosa de desempenho</li>
+            <li><span class="plan-feat-icon">✓</span> Estratégias detalhadas de prova</li>
+            <li><span class="plan-feat-icon">✓</span> Prioridade de suporte no WhatsApp</li>
+          </ul>
+        </div>
+        <a class="btn-secondary btn-full" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20o%20PERFORMANCE%20Online." target="_blank">Quero Performance Online</a>
+      </div>
+
+    </div>
+
+    <!-- CONSULTORIA ONLINE PERSONALIZADA (AMBOS OS SEXOS) -->
+    <div class="consultancy-card reveal">
+      <div>
+        <span class="badge-featured" style="position:static; display:inline-block; margin-bottom:1rem;">Multissex</span>
+        <h3 class="plan-name" style="font-size:1.6rem;">💪 Consultoria Online Personalizada</h3>
+        <p class="plan-target" style="min-height:auto;">Atendimento para homens e mulheres. Treinamento individualizado à distância com avaliação física completa, aplicativo exclusivo de treinos, suporte via WhatsApp, correções técnicas por vídeo e planejamento adaptado à sua rotina.</p>
+      </div>
+      <div class="consultancy-pricing">
+        <div class="price-row">
+          <span>Plano Mensal</span>
+          <strong>R$ 220 /mês</strong>
+        </div>
+        <div class="price-row">
+          <span>Plano Trimestral</span>
+          <strong>R$ 600</strong>
+        </div>
+        <div class="price-row">
+          <span>Plano Semestral</span>
+          <strong>R$ 1.100</strong>
+        </div>
+        <a class="btn-primary btn-full" style="margin-top: 1rem;" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20saber%20mais%20sobre%20a%20Consultoria%20Online%20Personalizada." target="_blank">Contratar Consultoria</a>
+      </div>
+    </div>
+
+    <!-- DIFERENCIAIS -->
+    <div class="differentials-box reveal">
+      <h3 class="differentials-title">🌸 Nossos Diferenciais</h3>
+      <p class="differentials-text">
+        Especialização em saúde da mulher, atenção dedicada para gestantes e pós-parto, metodologia 100% personalizada e comunidade acolhedora. Seja nos encontros presenciais ou no acompanhamento online continuous: saúde, performance e qualidade de vida sempre em primeiro lugar. 💗
+      </p>
+    </div>
+
   </div>
 </section>
 
@@ -363,10 +568,10 @@
     <p class="section-label reveal">Como funciona</p>
     <h2 class="section-title reveal">Simples assim</h2>
     <div class="steps-grid">
-      <div class="step-card reveal"><div class="step-number">01</div><p class="step-title">Entre em contato</p><p class="step-desc">Clique no botão e fale direto com a Thamyres pelo WhatsApp. É rápido e sem complicação.</p></div>
-      <div class="step-card reveal"><div class="step-number">02</div><p class="step-title">Realize o pagamento</p><p class="step-desc">Pague de forma segura via Pix, transferência ou cartão. Simples e acessível.</p></div>
-      <div class="step-card reveal"><div class="step-number">03</div><p class="step-title">Receba a planilha</p><p class="step-desc">Após a confirmação, você recebe sua planilha na hora, direto no WhatsApp em PDF/Link.</p></div>
-      <div class="step-card reveal"><div class="step-number">04</div><p class="step-title">Corra e evolua</p><p class="step-desc">Siga o programa, registre sua evolução e alcance metas que você nem sabia que eram possíveis.</p></div>
+      <div class="step-card reveal"><div class="step-number">01</div><p class="step-title">Entre em contato</p><p class="step-desc">Clique no botão do plano escolhido e fale direto com a Thamyres pelo WhatsApp.</p></div>
+      <div class="step-card reveal"><div class="step-number">02</div><p class="step-title">Avaliação & Alinhamento</p><p class="step-desc">A alinharemos seus objetivos, histórico de saúde e disponibilidades de horário.</p></div>
+      <div class="step-card reveal"><div class="step-number">03</div><p class="step-title">Acesso ao Programa</p><p class="step-desc">Receba suas planilhas, orientações ou horários de treinos presenciais imediatamente.</p></div>
+      <div class="step-card reveal"><div class="step-number">04</div><p class="step-title">Corra e evolua</p><p class="step-desc">Siga seu cronograma com suporte técnico continuo e supere suas metas com segurança.</p></div>
     </div>
   </div>
 </section>
@@ -380,10 +585,7 @@
       <div class="testi-card reveal">
         <div class="testi-quote">"</div>
         <p class="testi-text">
-          Seu acompanhamento mudou completamente minha relação com a academia, antes eu tinha muitas inseguranças com o ambiente e com os treinos, mas você sempre me fez sentir confortável, acolhida e capaz.<br><br>
-          Cada treino acaba sendo muito mais do que só exercício físico, sinto como uma extensão da terapia, porque saio me sentindo melhor comigo mesma, em meio a desabafos, risadas e suor rsrs<br><br>
-          Também adoro como você sempre reforça que resultado vai muito além da balança, fazendo a gente valorizar pequenas conquistas e mudanças que antes eu nem percebia, o que deixa o processo muito mais leve, saudável e motivador 🫶<br><br>
-          Minha experiência não poderia ser nada menos do que maravilhosa 💋💋
+          Seu acompanhamento mudou completamente minha relação com a academia... Cada treino acaba sendo muito mais do que só exercício físico, sinto como uma extensão da terapia.
         </p>
         <div class="testi-author">
           <div class="testi-avatar">ME</div>
@@ -397,12 +599,7 @@
       <div class="testi-card reveal">
         <div class="testi-quote">"</div>
         <p class="testi-text">
-          Bom dia meu amor!! Passando para te dar um feedback do meu primeiro dia no pilates.<br><br>
-          Percebi o quanto estou dura, sem flexibilidade e com muita tensão acumulada nos ombros. Quando fui curvar para descer os braços até o chão, senti bastante a coluna, como se estivesse muito sensível. Também notei que a perna direita me obedeceu menos nos exercícios do que a esquerda, acredito que por conta do nervo ciático.<br><br>
-          Outra dificuldade que senti bastante foi na respiração durante os treinos, preciso trabalhar melhor isso.<br><br>
-          Mas, apesar de tudo isso, hoje acordei me sentindo mais leve, com a sensação dos músculos “vivos” rsrs… e o melhor: sem dores! Estou ótima e já animada para amanhã, querendo fazer o meu melhor.<br><br>
-          Outra detalhe! Ao chegar em casa, senti um cansaço diferente e acabei dormindo mais cedo, esse cansaço relaxou meu corpo que o sono foi outro. Muito bom!!!<br><br>
-          Gratidão! A melhor personal do mundo 🫶
+          Apesar de tudo, hoje acordei me sentindo mais leve, com a sensação dos músculos “vivos” e o melhor: sem dores! Estou ótima e já animada para o próximo treino.
         </p>
         <div class="testi-author">
           <div class="testi-avatar">AM</div>
@@ -416,9 +613,7 @@
       <div class="testi-card reveal">
         <div class="testi-quote">"</div>
         <p class="testi-text">
-          Bom dia lindeza! Queria ter dado feedback ontem mas Anna dominou meu celular.<br><br>
-          Amei Sara. A abordagem, rolou empatia, a forma como conduziu com atenção, cuidado aos detalhes… enfim, só agradeço. Tenho confiança q estamos iniciando um trabalho de qualidade.<br><br>
-          Seguirei conforme orientações
+          A abordagem, a empatia e a forma como conduziu com atenção e cuidado aos detalhes... Enfim, só agradeço. Tenho confiança que iniciamos um trabalho incrível.
         </p>
         <div class="testi-author">
           <div class="testi-avatar">CG</div>
@@ -432,7 +627,7 @@
       <div class="testi-card reveal">
         <div class="testi-quote">"</div>
         <p class="testi-text">
-          Gente, você é tudoooo!!! Eu amei!! Com certeza irei fazer um bom uso de todos os ebooks, estou encantada com todo carinho e apoio que você tem com suas alunas
+          Você é tudooo!!! Eu amei!! Estou encantada com todo carinho e apoio que você tem com suas alunas em cada etapa.
         </p>
         <div class="testi-author">
           <div class="testi-avatar">LA</div>
@@ -453,20 +648,20 @@
     <h2 class="section-title reveal">Perguntas Frequentes</h2>
     <div class="faq-grid reveal">
       <details>
-        <summary>Sou totalmente iniciante, a planilha serve para mim?</summary>
-        <p>Sim! A planilha possui adaptações e uma progressão de volume ideal para quem está começando do zero, intercalando caminhada e corrida de forma segura.</p>
+        <summary>Sou totalmente iniciante, qual plano escolher?</summary>
+        <p>Os planos <strong>Start</strong> (tanto presencial quanto online) são ideais para quem está começando do zero. A carga de treino é adaptada de forma segura para o seu ritmo.</p>
       </details>
       <details>
-        <summary>Como vou receber o acesso?</summary>
-        <p>Assim que o pagamento for confirmado pelo WhatsApp, a Thamyres enviará o arquivo da planilha diretamente para você no próprio chat, de forma imediata.</p>
+        <summary>Como funciona o acompanhamento online?</summary>
+        <p>Você recebe suas planilhas de treinos e rotinas personalizadas, com suporte direto no WhatsApp para tirar dúvidas, enviar vídeos de execução e receber ajustes regulares de performance.</p>
       </details>
       <details>
-        <summary>Por quanto tempo tenho acesso à planilha?</summary>
-        <p>O acesso é vitalício. Uma vez que você compra a planilha, o material é seu para sempre, podendo refazer o ciclo de treinos quantas vezes quiser.</p>
+        <summary>Homens podem contratar a consultoria?</summary>
+        <p>Sim! A Consultoria Online Personalizada é voltada tanto para o público feminino quanto masculino, ajustando o treinamento de força e corrida conforme os objetivos de cada um.</p>
       </details>
       <details>
-        <summary>Tenho suporte caso tenha dúvidas?</summary>
-        <p>Com certeza. Você terá suporte direto via WhatsApp com a Thamyres para tirar dúvidas sobre execução, dores leves e ajustes de intensidade.</p>
+        <summary>Sou gestante ou pós-parto, posso treinar?</summary>
+        <p>Com certeza. A Thamyres possui especialização na saúde da mulher, gestantes e pós-parto, garantindo exercícios adequados para cada fase com total segurança.</p>
       </details>
     </div>
   </div>
@@ -479,7 +674,7 @@
       <h2 class="section-title">Pronta para transformar sua corrida?</h2>
       <p>Não espere o momento perfeito. Ele é agora. Dê o primeiro passo com quem sabe como te levar ao próximo nível.</p>
       <div class="cta-buttons">
-        <a class="btn-primary" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20comprar%20a%20planilha%20de%20corrida." target="_blank">📱 Falar com a Thamyres</a>
+        <a class="btn-primary" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20come%C3%A7ar%20meus%20treinos." target="_blank">📱 Falar com a Thamyres</a>
         <a class="btn-secondary" href="https://www.instagram.com/thamyresvertuani_personal?igsh=MmJsOXJ2czMxMTZq" target="_blank">📸 Instagram</a>
       </div>
     </div>
@@ -492,7 +687,7 @@
       <div class="footer-links">
         <a href="https://wa.me/5527998586051" target="_blank">WhatsApp</a>
         <a href="https://www.instagram.com/thamyresvertuani_personal?igsh=MmJsOXJ2czMxMTZq" target="_blank">Instagram</a>
-        <a href="#produto">Planilha</a>
+        <a href="#planos">Planos</a>
       </div>
   </div>
   
@@ -505,7 +700,7 @@
   </div>
 </footer>
 
-<a class="whatsapp-float" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Quero%20saber%20mais%20sobre%20a%20planilha%20de%20corrida." target="_blank" aria-label="Falar no WhatsApp">
+<a class="whatsapp-float" href="https://wa.me/5527998586051?text=Ol%C3%A1%20Thamyres!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20treinos." target="_blank" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
